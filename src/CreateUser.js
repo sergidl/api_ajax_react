@@ -30,14 +30,14 @@ function CreateUser() {
     }
 
     return(
-            <form id="register">
+            <form id="register" onSubmit={handleClick}>
                 <label forhtml="name">Nom:</label>
                 <input type="text" id="name" name="name" onChange={handleName}></input>
                 <label forhtml="nickname">Nickname:</label>
                 <input type="text" id="nickname" name="nickname" onChange={handleUsername}></input>
                 <label forhtml="email">EMail:</label>
                 <input type="email" id="name" name="name" onChange={handleEmail}></input>
-                <input type="button" id="send" value="Envia" onClick={handleClick}></input>
+                <button type="submit">Envia</button>
             </form>
     )
 }

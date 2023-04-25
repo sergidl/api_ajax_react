@@ -1,28 +1,33 @@
-import { useEffect } from "react";
+import React from "react";
 import axios from "axios";
+import UserDetails from "./UserDetails.js";
 
-function UserList() {
-    let tmp =0
-    console.log("1")
-    useEffect(() => {
+export default class UserList extends React.Component {
+    state = {
+        users: [],
+    };
+
+    handleClick(id){
+        UserDetails(id)
+    }
+    componentDidMount() {
         axios.get('http://192.168.1.192:8080/users').then(response => {
-            console.log(response)
-            tmp=response.data.users.length
-            console.log(tmp)
+            const users = response.data.users;
+            this.setState({ users });
         })
-        
-        
-        
-        
-    },[])
-    
-    return (
-        <div>{tmp}</div>
-    )
+    };
+
+    render() {
+        return (
+            <ul>
+                {this.state.users.map(e => 
+                    <li key={e.id} onClick={()=> this.handleClick(e.id)} value={e.id}>Nom: {e.name}; Nickname: {e.username}; Email: {e.email} </li>
+                )}
+            </ul>
+        )
+    };
+
 }
-
-export default UserList
-
 
 
 
